@@ -4,8 +4,7 @@ import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 import FireBase, { readOnceWithGet, writeUserData } from './api/FireBase';
 import "bootstrap/dist/css/bootstrap.css";
-
-
+import {ColorChart} from './api/ColorChart';
 
 
 
@@ -125,24 +124,35 @@ export default function Home({ allPostsData }) {
 
         {/* Recode Average */}
         <div className="row mt-3">
-          <lu className="col m-2">
+          <div className="col-2"></div>
+          <ul className="col-4 ">
             <li className={[utilStyles.RVsetup, "RA-0"].join(" ")}>415nm : {RV_List[0]}</li>
             <li className={[utilStyles.RVsetup, "RA-1"].join(" ")}>445nm : {RV_List[1]}</li>
             <li className={[utilStyles.RVsetup, "RA-2"].join(" ")}>480nm : {RV_List[2]}</li>
             <li className={[utilStyles.RVsetup, "RA-3"].join(" ")}>515nm : {RV_List[3]}</li>
+          </ul>
+
+          <ul className='col-4 '>
             <li className={[utilStyles.RVsetup, "RA-4"].join(" ")}>555nm : {RV_List[4]}</li>
             <li className={[utilStyles.RVsetup, "RA-5"].join(" ")}>590nm : {RV_List[5]}</li>
             <li className={[utilStyles.RVsetup, "RA-6"].join(" ")}>630nm : {RV_List[6]}</li>
             <li className={[utilStyles.RVsetup, "RA-7"].join(" ")}>680nm : {RV_List[7]}</li>
-          </lu>
+          </ul>
+          <div className="col-2"></div>
         </div>
 
 
+        {/* Color  Chart*/}
+        <div className="row ">
+          <ColorChart
+            val={RV_List}
+          />
+        </div>
 
 
         {/* Recode History */}
 
-        <div className="row">
+        <div className="row mt-5">
           <div className="col text-center text-light">Recode History</div>
         </div>
         <div className="row m-2">

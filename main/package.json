@@ -7,12 +7,14 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.8",
     "date-fns": "^2.29.3",
     "firebase": "^11.5.0",
     "gray-matter": "^4.0.3",
     "jquery": "^3.7.1",
     "next": "latest",
     "react": "latest",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "latest",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1"
