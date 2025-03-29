@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
   padding: 0;
   margin: 0;
@@ -15,7 +15,6 @@ body {
     Helvetica Neue,
     sans-serif;
   line-height: 1.6;
-  font-size: 18px;
 }
 
 * {
@@ -34,4 +33,9 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
-}
+} */
+
+
+/* body{
+  background-color: #000000;
+} */
