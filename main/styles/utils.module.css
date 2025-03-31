@@ -1,5 +1,5 @@
 .lisetup{
-  font-size: 10px;
+  font-size: 7px;
   color: #8a8a8a;
 }
 
@@ -8,3 +8,6 @@
   color: #c6c6c6;
 }
 
+.cardColor {
+  background-color: rgba(0, 0, 0, 1);
+}

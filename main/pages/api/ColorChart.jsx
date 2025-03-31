@@ -133,24 +133,26 @@ export function ColorChart(props) {
         <main>
             <div className="container">
 
-                <div className="row mt-5">
-                    <div className="col text-center text-light">Bar Chart</div>
-                </div>
 
-                <div className="row">
-                    <div style={{ width: "1000px", margin: "0 auto" }}>
-                        <Bar data={data} options={options} />
+                <div className="row mt-3">
+
+                    <div className="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                        <div className="row mt-3">
+                            <div className="col text-center text-light">Bar Chart</div>
+                        </div>
+                        <div className="row">
+                            <Bar className="col" data={data} options={options} />
+                        </div>
+                        
                     </div>
-                </div>
 
-                <div className="row mt-5">
-                    <div className="col text-center text-light">Doughnut Chart</div>
-                </div>
-
-
-                <div className="row">
-                    <div style={{ width: "1000px", margin: "0 auto" }}>
-                        <Doughnut data={Doughnut_data} />;
+                    <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" >
+                        <div className="row">
+                            <div className="col text-center text-light">Doughnut Chart</div>
+                        </div>
+                        <div className="row">
+                            <Doughnut className='col' data={Doughnut_data} />
+                        </div>
                     </div>
                 </div>
             </div>
