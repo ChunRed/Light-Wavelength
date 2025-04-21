@@ -14,8 +14,20 @@ import { ColorChart } from './api/ColorChart';
 
 export default function Home({ allPostsData }) {
 
-  //value
-  let Wavelength_List = [
+  //MARK: Wavelength_List：儲存10筆資料集的陣列變數
+  // let Wavelength_List = [
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"],
+  //   ["0", "0", "0", "0", "0", "0", "0", "0"]];
+
+  let [Wavelength_List, setWavelength_List] = useState([["0", "0", "0", "0", "0", "0", "0", "0"],
     ["0", "0", "0", "0", "0", "0", "0", "0"],
     ["0", "0", "0", "0", "0", "0", "0", "0"],
     ["0", "0", "0", "0", "0", "0", "0", "0"],
@@ -24,55 +36,70 @@ export default function Home({ allPostsData }) {
     ["0", "0", "0", "0", "0", "0", "0", "0"],
     ["0", "0", "0", "0", "0", "0", "0", "0"],
     ["0", "0", "0", "0", "0", "0", "0", "0"],
-    ["0", "0", "0", "0", "0", "0", "0", "0"],
-    ["0", "0", "0", "0", "0", "0", "0", "0"]];
+    ["0", "0", "0", "0", "0", "0", "0", "0"]]);
   let [RV_List, setRV_List] = useState(["0", "0", "0", "0", "0", "0", "0", "0"]);
 
   function Send() {
     //writeUserData(ID, Name, Date, Time);
   }
 
+
+  //MARK: 固定時間讀取光線數值
   function TimerCheck() {
     setInterval(() => {
-      Wavelength_List.pop();
-      Wavelength_List.unshift(readOnceWithGet() == '' ? ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'] : readOnceWithGet().split(","));
+
+      let new_Wavelength_List = Wavelength_List;
+      //MARK: 移除存取起中的最後一個個數值
+      new_Wavelength_List.pop();
+      //MARK: 將數值加入存取起中的第一個位
+      new_Wavelength_List.unshift(
+        readOnceWithGet() == '' ? ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'] : readOnceWithGet().split(","));
 
 
 
-      for (let i = 0; i < Wavelength_List.length; i++) {
-        document.querySelector('.msg-' + i).innerHTML = Wavelength_List[i];
+      for (let i = 0; i < new_Wavelength_List.length; i++) {
+        document.querySelector('.msg-' + i).innerHTML = new_Wavelength_List[i];
       }
 
+
+      //MARK: 取new_msg陣列的平均值
+      //1. 同波長相加
       let new_msg = [0, 0, 0, 0, 0, 0, 0, 0]
-      for (let i = 0; i < Wavelength_List.length; i++) {
+      for (let i = 0; i < new_Wavelength_List.length; i++) {
         for (let j = 0; j < 8; j++) {
-          new_msg[j] += parseInt(Wavelength_List[i][j]);
+          new_msg[j] += parseInt(new_Wavelength_List[i][j]);
         }
       }
-
+      //2. 波長總和除以總資料量（10筆）
       let rv_msg = [0, 0, 0, 0, 0, 0, 0, 0]
       for (let i = 0; i < 8; i++) {
         rv_msg[i] = new_msg[i] / 10;
       }
 
+      //MARK: 儲存平均值至 RV_List
       setRV_List(rv_msg);
 
+      //MARK: 回傳至Wavelength_List usestate 值
+      setWavelength_List(Wavelength_List = new_Wavelength_List);
 
     }, 5000);
   }
 
   useEffect(() => {
-    Wavelength_List.pop();
-    Wavelength_List.unshift(readOnceWithGet() == '' ? ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'] : readOnceWithGet().split(","));
 
-    for (let i = 0; i < Wavelength_List.length; i++) {
-      document.querySelector('.msg-' + i).innerHTML = Wavelength_List[i];
+    let new_Wavelength_List = Wavelength_List;
+
+    new_Wavelength_List.pop();
+    new_Wavelength_List.unshift(readOnceWithGet() == '' ? ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'] : readOnceWithGet().split(","));
+
+    for (let i = 0; i < new_Wavelength_List.length; i++) {
+      document.querySelector('.msg-' + i).innerHTML = new_Wavelength_List[i];
     }
 
     let new_msg = [0, 0, 0, 0, 0, 0, 0, 0]
-    for (let i = 0; i < Wavelength_List.length; i++) {
+    for (let i = 0; i < new_Wavelength_List.length; i++) {
       for (let j = 0; j < 8; j++) {
-        new_msg[j] += parseInt(Wavelength_List[i][j]);
+        new_msg[j] += parseInt(new_Wavelength_List[i][j]);
       }
     }
 
@@ -81,9 +108,11 @@ export default function Home({ allPostsData }) {
       rv_msg[i] = new_msg[i] / 10;
     }
 
+    //MARK: 儲存平均值至 RV_List
     setRV_List(rv_msg);
 
-
+    //MARK: 回傳至Wavelength_List usestate 值
+    setWavelength_List(Wavelength_List = new_Wavelength_List);
 
     TimerCheck();
 
@@ -162,6 +191,7 @@ export default function Home({ allPostsData }) {
         <div className="row ">
           <ColorChart
             val={RV_List}
+            dataset={Wavelength_List}
           />
         </div>
 
