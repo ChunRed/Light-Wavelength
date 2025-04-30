@@ -34,7 +34,7 @@ export function readOnceWithGet() {
 
             data= snapshot.val();
 
-            console.log(data);
+            //console.log(data);
             
 
         } else {

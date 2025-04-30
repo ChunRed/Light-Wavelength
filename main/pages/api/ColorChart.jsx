@@ -290,7 +290,7 @@ export function ColorChart(props) {
 
 
 
-    console.log(val_dataset);
+    //console.log(val_dataset);
 
 
     return (
@@ -329,7 +329,7 @@ export function ColorChart(props) {
                         </div>
 
                         <div className="row " >
-                            <Line data={linechartdata_415} width={100} height={20} options={Options} />
+                            <Line data={linechartdata_415} width={100} height={15} options={Options} />
                         </div>
                         <div className="row">
                             <Line data={linechartdata_445} width={100} height={15} options={Options} />

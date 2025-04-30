@@ -5,6 +5,7 @@ import Link from 'next/link';
 import FireBase, { readOnceWithGet, writeUserData } from './api/FireBase';
 import "bootstrap/dist/css/bootstrap.css";
 import { ColorChart } from './api/ColorChart';
+import WavelengthColor from './api/WavelengthColor';
 
 
 
@@ -87,12 +88,14 @@ export default function Home({ allPostsData }) {
 
       //MARK: 儲存平均值至 RV_List
       setRV_List(rv_msg);
+      
 
       //MARK: 回傳至Wavelength_List usestate 值
       setWavelength_List(Wavelength_List = new_Wavelength_List);
       //console.log("dataset length : "+Wavelength_List.length.toString());
 
-    }, 5000);
+      
+    }, 2000);
   }
 
   useEffect(() => {
@@ -144,17 +147,9 @@ export default function Home({ allPostsData }) {
         </div>
 
 
-        {/* Input Card */}
-        <div className="row mt-3 ">
-
-          <div className="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
-
-          <div className="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8  ">
-            <input type="text" className="form-control color text-light" placeholder="recode" aria-label="recode" aria-describedby="button-addon2" ></input>
-          </div>
-
-          <div className="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
-
+        {/* Convert to sRGB value */}
+        <div className="row mt-5">
+          <WavelengthColor values={RV_List} />
         </div>
 
         {/* <div className="row mt-2 justify-content-center">
@@ -206,6 +201,8 @@ export default function Home({ allPostsData }) {
             dataset={Wavelength_List}
           />
         </div>
+
+
 
 
         {/* Recode History */}
